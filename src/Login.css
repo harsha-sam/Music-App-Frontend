@@ -1,9 +1,18 @@
-.illustration{
-    width: 30%;
+.flex-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
 }
-.login-container{
-    margin-top: 15%;   
+.flex-row img{
+    width: 40%;
 }
-.login-btn{
-    margin-left: 15%;
+.flex-row a{
+    margin-left: 10%;
+}
+@media screen and (max-width:750px) {
+    .flex-row img{
+        width: 60%;
+    }
 }

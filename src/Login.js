@@ -1,5 +1,4 @@
 import React from 'react';
-import { Container } from 'react-bootstrap';
 import './Login.css'
 import audioPlayerIllustration from "./assets/audio-player-illustration.svg"
 
@@ -7,12 +6,11 @@ const AUTH_URL = "https://accounts.spotify.com/authorize?client_id=449154ee43934
 
 function Login() {
     return (
-        <Container className="d-flex flex-row justify-content-center
-         align-items-center login-container">
-            <img src={audioPlayerIllustration} alt="logo" className="illustration"/>
-            <a href={AUTH_URL} className="btn btn-success btn-lg login-btn">
-            Login with Spotify</a>
-        </Container>
+        <div className="container-fluid flex-row">
+            <img src={audioPlayerIllustration} alt="Audio Player illustration"/>
+            <a href={AUTH_URL} className="btn btn-success btn-lg">
+                Login with Spotify</a>
+        </div>
     )
 }
 
