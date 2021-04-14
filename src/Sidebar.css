@@ -1,0 +1,23 @@
+.sidebar{
+    display: flex;
+    flex-direction: column;
+    flex: 0.1;
+    margin: 2% 2% 0;
+    border: 2px solid black;
+}
+.sidebar__logo {
+    height: 70px;
+    width: inherit;
+    margin-bottom: 12px;
+}
+.sidebar_title{
+    font-size: 14px;
+    margin-left: 10px;
+    margin-right: 10px;
+    color: gray;
+}
+.divider{
+    background-color: gray;
+    width: 75%;
+    margin-left: 10px;
+}

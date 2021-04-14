@@ -1,3 +1,45 @@
-.container-fluid{
-    padding: 12% 10% 0;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
+.container-fluid {
+  padding: 12% 10% 0;
+}
+.main-flex {
+  display: flex;
+  flex-wrap: wrap;
+  height: 100vh;
+}
+.home{
+    flex: 0.9;
+    background-image: linear-gradient(to top, #181818 66%, #000 0%);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    padding: 3% 2% 0;
+    overflow-y: overlay;
+}
+body{
+    background-color: #000;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+}
+.trackCard{
+    background: #000;
+    border-radius: 4px;
+    padding: 16px;
+    cursor: pointer;
+    transition: background-color .3s ease;
+    align-self: baseline;
+}
+.trackCard:hover{
+    background: gray;
+}
+.trackCard-container{
+    display: flex;
+    justify-content: space-between;
+    align-items:baseline;
+    gap: 30px;
+    flex-basis: 33.3%;
+}
+.avatar{
+    margin-left: 80%;
 }
