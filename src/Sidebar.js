@@ -9,7 +9,7 @@ import grey from '@material-ui/core/colors/grey';
 import "./SidebarOption.css";
 import "./Sidebar.css";
 
-function Sidebar({playlists}) {
+function Sidebar({playlists, handleCurr}) {
     return (
         <section className="sidebar">
             <img
@@ -17,23 +17,24 @@ function Sidebar({playlists}) {
                 src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_RGB_White.png"
                 alt="Spotify logo"
             />
-            <SidebarOption title="Home" Icon={HomeIcon}/>
-            <SidebarOption title="Search" Icon={SearchIcon}/>
-            <SidebarOption title="Your Library" Icon={LibraryMusicIcon}/>
+            <SidebarOption title="Home" Icon={HomeIcon} handleCurr={handleCurr}/>
+            <SidebarOption title="Search" Icon={SearchIcon} handleCurr={handleCurr}/>
+            <SidebarOption title="Your Library" Icon={LibraryMusicIcon} handleCurr={handleCurr}/>
             <br></br>
-            <SidebarOption title="Create Playlist" Icon={AddBoxIcon} IconColor={grey['300']}/>
-            <SidebarOption title="Liked Songs" Icon={FavoriteRoundedIcon} IconColor={red['900']}/>
+            <SidebarOption title="Create Playlist" Icon={AddBoxIcon} IconColor={grey['300']} handleCurr={handleCurr}/>
+            <SidebarOption title="Liked Songs" Icon={FavoriteRoundedIcon} IconColor={red['900']} handleCurr={handleCurr}/>
             <hr className="divider"></hr>
+            <strong className="mb-3">PUBLIC PLAYLISTS</strong>
             {playlists?.items?.map((playlist) => {
-                return <SidebarOption title={playlist.name} />
+                return <SidebarOption title={playlist.name} handleCurr={handleCurr}/>
             })}
         </section>
     )
 }
 
-function SidebarOption({title, Icon, IconColor}) {
+function SidebarOption({title, Icon, IconColor, handleCurr}) {
     return(
-        <div className="sidebarOption">
+        <div className="sidebarOption" onClick={() => handleCurr(title)}>
             {Icon && <Icon style={{ color: IconColor }} className="sidebarOption_icon" />}
             {Icon ? <h4>{title}</h4>:<p>{title}</p>}
         </div>

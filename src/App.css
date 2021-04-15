@@ -16,6 +16,8 @@
     align-items: flex-start;
     padding: 3% 2% 0;
     overflow-y: overlay;
+    overflow-x: hidden;
+    height: 90vh;
 }
 body{
     background-color: #000;
@@ -38,8 +40,26 @@ body{
     justify-content: space-between;
     align-items:baseline;
     gap: 30px;
-    flex-basis: 33.3%;
+    overflow-x: scroll;
+    width: 100vw;
 }
 .avatar{
-    margin-left: 80%;
+    margin-left: 85%;
+}
+.search{
+    flex: 0.9;
+    display: flex;
+    padding: 3% 2% 0;
+    overflow-y: overlay;
+    flex-direction: column;
+}
+.searchResults{
+    height: 70vh;
+    overflow-y: scroll;
+}
+.track{
+    cursor: pointer;
+}
+.player{
+    flex-basis: 100%;
 }

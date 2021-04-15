@@ -1,11 +1,13 @@
-import React, { useEffect, useReducer } from 'react'
+import React, { useEffect, useReducer, useState } from 'react'
 import useAuth from "./useAuth"
 import SpotifyWebApi from "spotify-web-api-node"
 import Sidebar from "./Sidebar.js"
 import { Avatar } from "@material-ui/core/";
 import Chip from '@material-ui/core/Chip';
 import { makeStyles } from '@material-ui/core/styles';
-import Home from "./Home"
+import Home from "./Home";
+import Search from "./Search";
+import Player from "./Player";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -73,6 +75,14 @@ const Dashboard = ({ code }) => {
     const accessToken = useAuth(code)
     const [state, dispatch] = useReducer(reducer, initialState)
     const classes = useStyles();
+    const [curr, setCurr] = useState("Home");
+    const [playingTrack, setPlayingTrack] = useState(null);
+
+    const handleCurr = ((value) => setCurr(value))
+
+    const chooseTrack = (track) => {
+        setPlayingTrack(track)
+    }
 
     useEffect(() => {
         if (!accessToken) return
@@ -82,21 +92,42 @@ const Dashboard = ({ code }) => {
             .then((data) => dispatch({ type: "SET_USER", payLoad: data.body }), (err) => console.log(err))
         spotifyApi.getNewReleases({ limit: 10, offset: 0, country: "IN" })
             .then((data) => dispatch({ type: "SET_NEW_RELEASES", payLoad: data.body }), (err) => console.log(err))
-        spotifyApi.getMySavedTracks()
-            .then((data) => dispatch({ type: "SET_PLAYLISTS", payLoad: data.body }), (err) => console.log(err))
+        spotifyApi.getUserPlaylists()
+        .then((data) => dispatch({ type: "SET_PLAYLISTS", payLoad: data.body }), (err) => console.log(err))
     }, [accessToken])
 
     console.log(state)
     return <div className="main-flex">
-        <Sidebar />
-        <div className="home">
-            <Chip
-                icon = {<Avatar src={state.user?.images?.[0].url} className={classes.small}/>}
-                label = {state.user?.display_name}
-                onDelete={() => dispatch({type: "SIGN_OUT"})}
-                className="avatar"
-            />
-            <Home newReleases={state.newReleases}/>
+        <Sidebar playlists={state.playlists}
+        handleCurr={handleCurr}
+        />
+        {
+            curr === "Home" ?
+            <div className="home">
+                <Chip
+                    icon = {<Avatar src={state.user?.images?.[0].url} className={classes.small}/>}
+                    label = {state.user?.display_name}
+                    onDelete={() => dispatch({type: "SIGN_OUT"})}
+                    className="avatar"
+                />
+                <Home newReleases={state.newReleases}/>
+            </div>
+            :
+            (curr === "Search" ?
+                <div className="search">
+                <Chip
+                    icon = {<Avatar src={state.user?.images?.[0].url} className={classes.small}/>}
+                    label = {state.user?.display_name}
+                    onDelete={() => dispatch({type: "SIGN_OUT"})}
+                    className="avatar"
+                />
+                <Search spotifyApi={spotifyApi} chooseTrack={chooseTrack}/>
+            </div> 
+            :
+            null)
+        }
+        <div className="player">
+            <Player accessToken={accessToken} trackUri={playingTrack} />
         </div>
     </div>
 }
