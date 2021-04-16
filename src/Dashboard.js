@@ -8,23 +8,24 @@ import { makeStyles } from '@material-ui/core/styles';
 import Home from "./Home";
 import Search from "./Search";
 import Player from "./Player";
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-      display: 'flex',
-      '& > *': {
-        margin: theme.spacing(1),
-      },
+        display: 'flex',
+        '& > *': {
+            margin: theme.spacing(1),
+        },
     },
     small: {
-      width: theme.spacing(3),
-      height: theme.spacing(3),
+        width: theme.spacing(3),
+        height: theme.spacing(3),
     },
     large: {
-      width: theme.spacing(7),
-      height: theme.spacing(7),
+        width: theme.spacing(7),
+        height: theme.spacing(7),
     },
-  }));
+}));
 
 const spotifyApi = new SpotifyWebApi({
     client_id: "449154ee43934fedaf41f90755746f08"
@@ -77,12 +78,28 @@ const Dashboard = ({ code }) => {
     const classes = useStyles();
     const [curr, setCurr] = useState("Home");
     const [playingTrack, setPlayingTrack] = useState(null);
+    const [playingTrackLyrics, setPlayingTrackLyrics] = useState("")
 
     const handleCurr = ((value) => setCurr(value))
 
     const chooseTrack = (track) => {
         setPlayingTrack(track)
+        setPlayingTrackLyrics("")
     }
+
+    useEffect(() => {
+        if (!playingTrack) return
+        axios
+            .get("http://localhost:3001/lyrics", {
+                params: {
+                    title: playingTrack.title,
+                    artist: playingTrack.artist,
+                }
+            })
+            .then(res => {
+                setPlayingTrackLyrics(res.data.lyrics)
+            })
+    }, [playingTrack])
 
     useEffect(() => {
         if (!accessToken) return
@@ -93,41 +110,41 @@ const Dashboard = ({ code }) => {
         spotifyApi.getNewReleases({ limit: 10, offset: 0, country: "IN" })
             .then((data) => dispatch({ type: "SET_NEW_RELEASES", payLoad: data.body }), (err) => console.log(err))
         spotifyApi.getUserPlaylists()
-        .then((data) => dispatch({ type: "SET_PLAYLISTS", payLoad: data.body }), (err) => console.log(err))
+            .then((data) => dispatch({ type: "SET_PLAYLISTS", payLoad: data.body }), (err) => console.log(err))
     }, [accessToken])
 
-    console.log(state)
     return <div className="main-flex">
         <Sidebar playlists={state.playlists}
-        handleCurr={handleCurr}
+            handleCurr={handleCurr}
+            curr={curr}
         />
         {
             curr === "Home" ?
-            <div className="home">
-                <Chip
-                    icon = {<Avatar src={state.user?.images?.[0].url} className={classes.small}/>}
-                    label = {state.user?.display_name}
-                    onDelete={() => dispatch({type: "SIGN_OUT"})}
-                    className="avatar"
-                />
-                <Home newReleases={state.newReleases}/>
-            </div>
-            :
-            (curr === "Search" ?
-                <div className="search">
-                <Chip
-                    icon = {<Avatar src={state.user?.images?.[0].url} className={classes.small}/>}
-                    label = {state.user?.display_name}
-                    onDelete={() => dispatch({type: "SIGN_OUT"})}
-                    className="avatar"
-                />
-                <Search spotifyApi={spotifyApi} chooseTrack={chooseTrack}/>
-            </div> 
-            :
-            null)
+                <div className="home">
+                    <Chip
+                        icon={<Avatar src={state.user?.images?.[0].url} className={classes.small} />}
+                        label={state.user?.display_name}
+                        onDelete={() => dispatch({ type: "SIGN_OUT" })}
+                        className="avatar"
+                    />
+                    <Home newReleases={state.newReleases} />
+                </div>
+                :
+                (curr === "Search" ?
+                    <div className="search">
+                        <Chip
+                            icon={<Avatar src={state.user?.images?.[0].url} className={classes.small} />}
+                            label={state.user?.display_name}
+                            onDelete={() => dispatch({ type: "SIGN_OUT" })}
+                            className="avatar"
+                        />
+                        <Search spotifyApi={spotifyApi} chooseTrack={chooseTrack} playingTrackLyrics={playingTrackLyrics} />
+                    </div>
+                    :
+                    null)
         }
         <div className="player">
-            <Player accessToken={accessToken} trackUri={playingTrack} />
+            <Player accessToken={accessToken} trackUri={playingTrack?.uri} />
         </div>
     </div>
 }

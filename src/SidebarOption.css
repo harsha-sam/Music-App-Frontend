@@ -21,3 +21,6 @@
 .sidebarOption > p{
     margin-left: 8px;
 }
+.active{
+    color: white;
+}

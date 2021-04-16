@@ -21,3 +21,7 @@
   margin: 10px;
   color: gray;
 }
+.playlists{
+    height: 30vh;
+    overflow-y: scroll;
+}

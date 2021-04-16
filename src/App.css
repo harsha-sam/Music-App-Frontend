@@ -9,7 +9,7 @@
   height: 100vh;
 }
 .home{
-    flex: 0.9;
+    flex: 1;
     background-image: linear-gradient(to top, #181818 66%, #000 0%);
     display: flex;
     flex-wrap: wrap;
@@ -17,7 +17,7 @@
     padding: 3% 2% 0;
     overflow-y: overlay;
     overflow-x: hidden;
-    height: 90vh;
+    height: 80vh;
 }
 body{
     background-color: #000;
@@ -47,19 +47,36 @@ body{
     margin-left: 85%;
 }
 .search{
-    flex: 0.9;
+    flex: 1;
     display: flex;
     padding: 3% 2% 0;
     overflow-y: overlay;
     flex-direction: column;
 }
 .searchResults{
-    height: 70vh;
+    height: 60vh;
     overflow-y: scroll;
 }
 .track{
     cursor: pointer;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 10px;
 }
 .player{
     flex-basis: 100%;
+}
+.lyrics{
+    text-align: justify;
+    letter-spacing: 2px;
+    height: 60vh;
+    overflow-y: scroll;
+    padding: 2%;
+}
+.lyrics h3{
+    color: #1cb954;
+}
+small{
+    color: gray;
 }
