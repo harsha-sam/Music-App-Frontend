@@ -90,7 +90,7 @@ const Dashboard = ({ code }) => {
     useEffect(() => {
         if (!playingTrack) return
         axios
-            .get("http://localhost:3001/lyrics", {
+            .get("https://web-musix-api.azurewebsites.net/lyrics", {
                 params: {
                     title: playingTrack.title,
                     artist: playingTrack.artist,

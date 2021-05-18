@@ -8,7 +8,7 @@ const useAuth = (code) => {
 
     useEffect(() => {
         axios
-            .post("http://localhost:3001/login", {
+            .post("https://web-musix-api.azurewebsites.net/login", {
                 authorizationCode: code
             })
             .then((res) => {
@@ -27,7 +27,7 @@ const useAuth = (code) => {
         if (!refreshToken || !expiresIn) return
         const interval = setInterval(() => {
             axios
-                .post("http://localhost:3001/refresh", {
+                .post("https://web-musix-api.azurewebsites.net/refresh", {
                     refreshToken,
                 })
                 .then(res => {

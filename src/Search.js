@@ -55,6 +55,9 @@ function Search({ spotifyApi, chooseTrack, playingTrackLyrics }) {
             {searchResults.length === 0 && playingTrackLyrics &&
             <div className="lyrics">
                 <h3>Lyrics</h3>
+                {playingTrackLyrics !== "No lyrics found !" && 
+                <small>Note: This lyrics may not be correct</small>}
+                <br></br>
                 {playingTrackLyrics}
             </div>}
         </section>
