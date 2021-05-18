@@ -90,11 +90,9 @@ const Dashboard = ({ code }) => {
     useEffect(() => {
         if (!playingTrack) return
         axios
-            .get("https://web-musix-api.azurewebsites.net/lyrics", {
-                params: {
-                    title: playingTrack.title,
-                    artist: playingTrack.artist,
-                }
+            .post("https://web-music-api.azurewebsites.net/lyrics", {
+                title: playingTrack.title,
+                artist: playingTrack.artist,
             })
             .then(res => {
                 setPlayingTrackLyrics(res.data.lyrics)
