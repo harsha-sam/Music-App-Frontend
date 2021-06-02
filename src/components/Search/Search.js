@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+import { StateContext } from "../../App.js";
 
-function Search({ spotifyApi, chooseTrack, playingTrackLyrics }) {
+function Search({ chooseTrack, playingTrackLyrics }) {
     const [search, setSearch] = useState("");
     const [searchResults, setSearchResults] = useState([]);
-
+    const { state } = useContext(StateContext);
+    const { spotifyApi } = state;
     useEffect(() => {
         if (!search) {
             setSearchResults([])
@@ -55,10 +57,11 @@ function Search({ spotifyApi, chooseTrack, playingTrackLyrics }) {
             {searchResults.length === 0 && playingTrackLyrics &&
             <div className="lyrics">
                 <h3>Lyrics</h3>
-                {playingTrackLyrics !== "No lyrics found !" && 
-                <small>Note: This lyrics may not be correct</small>}
-                <br></br>
-                {playingTrackLyrics}
+                <div className="mt-2">
+                    {playingTrackLyrics.split("\n").map((line, index) => {
+                        return <p key={index}>{line}</p>
+                    })}
+                </div>
             </div>}
         </section>
     )
