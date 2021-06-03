@@ -7,6 +7,7 @@
   display: flex;
   flex-wrap: wrap;
   height: 100vh;
+  overflow-y: scroll;
 }
 .home{
     flex: 1;
@@ -16,7 +17,6 @@
     align-items: flex-start;
     padding: 3% 2% 0;
     overflow-y: overlay;
-    overflow-x: hidden;
     height: 80vh;
 }
 body{
@@ -33,15 +33,15 @@ body{
     align-self: baseline;
 }
 .trackCard:hover{
-    background: gray;
+    background: #1a1b2c;
 }
 .trackCard-container{
     display: flex;
     justify-content: space-between;
     align-items:baseline;
     gap: 30px;
-    overflow-x: scroll;
-    width: 100vw;
+    width: 75vw;
+    overflow-x: auto;
 }
 .avatar{
     margin-left: 85%;
@@ -50,8 +50,15 @@ body{
     flex: 1;
     display: flex;
     padding: 3% 2% 0;
-    overflow-y: overlay;
+    background-image: linear-gradient(to top, #181818 70%, #000 0%);
     flex-direction: column;
+    overflow-x: hidden;
+}
+.MuiInput-root {
+    position: relative;
+    border-radius: 500px;
+    width: 35%;
+    padding: 1.5% 1.5% 1.5% 2%;
 }
 .searchResults{
     height: 60vh;
@@ -65,7 +72,10 @@ body{
     margin-bottom: 10px;
 }
 .player{
-    flex-basis: 100%;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
 }
 .lyrics{
     text-align: justify;
@@ -77,6 +87,13 @@ body{
 .lyrics h3{
     color: #1cb954;
 }
-small{
+small, .color-gray{
     color: gray;
+}
+a, a:hover{
+    text-decoration: none;
+    color: #fff
+}
+::-webkit-scrollbar {
+    display: none;
 }

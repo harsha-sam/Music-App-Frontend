@@ -12,7 +12,8 @@ const SCOPES = [
     "user-library-read",
     "user-library-modify",
     "user-read-playback-state",
-    "user-modify-playback-state"
+    "user-modify-playback-state",
+    "user-read-recently-played"
 ]
 const AUTH_URL = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&response_type=code\
 &redirect_uri=${REDIRECT_URI}&scope=${SCOPES.join("%20")}`

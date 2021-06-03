@@ -1,10 +1,16 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect, useContext } from 'react';
+import Input from '@material-ui/core/Input';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import SearchIcon from '@material-ui/icons/Search';
 import { StateContext } from "../../App.js";
+import { DispatchContext } from "../../App.js";
+import { SET_PLAYING_TRACKS } from "../../store/actions";
 
 function Search({ chooseTrack, playingTrackLyrics }) {
     const [search, setSearch] = useState("");
     const [searchResults, setSearchResults] = useState([]);
     const { state } = useContext(StateContext);
+    const { dispatch } = useContext(DispatchContext);
     const { spotifyApi } = state;
     useEffect(() => {
         if (!search) {
@@ -34,16 +40,20 @@ function Search({ chooseTrack, playingTrackLyrics }) {
     return (
         <section>
             <div className="form-group mt-4">
-                <input type="text"
-                    placeholder="Search for Song, Artist, Album" className="form-control"
+                <Input
+                    className="form-control"
+                    disableUnderline="true"
+                    placeholder={"Songs, Artists or Albums"}
+                    type={'text'}
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
+                    startAdornment={<InputAdornment position="start"><SearchIcon /></InputAdornment>}
                 />
             </div>
             {searchResults.length > 0 && <div className="searchResults">
                 {searchResults.map((track) => {
                     return <div key={track.uri} className="track" onClick={() => {
-                        chooseTrack(track)
+                        dispatch({type: SET_PLAYING_TRACKS, payLoad: track})
                         setSearch("")
                     }}>
                         <img src={track.albumUrl} alt={track.title} />
