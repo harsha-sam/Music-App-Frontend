@@ -1,7 +1,7 @@
-import { useState, useRef, useEffect, useContext } from "react"
+import { useRef, useEffect, useContext } from "react"
 import { StateContext } from "../../App";
 import { DispatchContext } from "../../App";
-import { SET_PLAY } from "../../store/actions";
+import { SET_PLAY, SET_PLAYING_TRACK_LYRICS } from "../../store/actions";
 import SpotifyPlayer from "react-spotify-web-playback";
 import axios from 'axios';
 
@@ -11,20 +11,13 @@ export default function Player() {
     const isInitialMount = useRef(true);
     const { state } = useContext(StateContext);
     const { dispatch } = useContext(DispatchContext);
-    const [playingTrackLyrics, setPlayingTrackLyrics] = useState("")
 
     useEffect(() => {
         if (isInitialMount.current && state.playingTracks) {
             isInitialMount.current = false;
          } else {
-            dispatch({ type: SET_PLAY, payLoad: true })
-         }
-    }, [state.playingTracks, dispatch])
-
-    useEffect(() => {
-        if (!state.playingTracks) return
-        console.log(state.playingTracks)
-        axios
+            dispatch({ type: SET_PLAYING_TRACK_LYRICS, payLoad: "Loading..."})
+            axios
             .get(`${API_BASE_URL}/lyrics`, {
                 params: {
                     title: state.playingTracks.title,
@@ -33,10 +26,12 @@ export default function Player() {
             })
             .then(res => {
                 console.log(res.data.lyrics);
-                setPlayingTrackLyrics(res.data.lyrics)
+                dispatch({ type: SET_PLAYING_TRACK_LYRICS, payLoad: res.data.lyrics})
             })
             .catch(err => console.log(err))
-    }, [state.playingTracks])
+            dispatch({ type: SET_PLAY, payLoad: true })
+         }
+    }, [state.playingTracks, dispatch])
 
     if (!state.accessToken) return null
     return (

@@ -6,7 +6,7 @@ import { StateContext } from "../../App.js";
 import { DispatchContext } from "../../App.js";
 import { SET_PLAYING_TRACKS } from "../../store/actions";
 
-function Search({ chooseTrack, playingTrackLyrics }) {
+function Search({ chooseTrack }) {
     const [search, setSearch] = useState("");
     const [searchResults, setSearchResults] = useState([]);
     const { state } = useContext(StateContext);
@@ -64,11 +64,11 @@ function Search({ chooseTrack, playingTrackLyrics }) {
                     </div>
                 })}
             </div>}
-            {searchResults.length === 0 && playingTrackLyrics &&
+            {searchResults.length === 0 && state.playingTrackLyrics &&
             <div className="lyrics">
                 <h3>Lyrics</h3>
-                <div className="mt-2">
-                    {playingTrackLyrics.split("\n").map((line, index) => {
+                <div className="mt-2 ml-1">
+                    {state.playingTrackLyrics.split("\n").map((line, index) => {
                         return <p key={index}>{line}</p>
                     })}
                 </div>

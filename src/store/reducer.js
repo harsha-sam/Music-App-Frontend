@@ -5,6 +5,7 @@ import {
     SET_PLAYLISTS,
     SET_PLAY,
     SET_PLAYING_TRACKS,
+    SET_PLAYING_TRACK_LYRICS,
     SET_FEATURED_PLAYLISTS,
     SIGN_OUT
 } from "./actions";
@@ -49,6 +50,9 @@ export const reducer = ((state = initialState, action) => {
         }
         case SET_PLAYING_TRACKS: {
             return { ...state, playingTracks: payLoad }
+        }
+        case SET_PLAYING_TRACK_LYRICS: {
+            return { ...state, playingTrackLyrics: payLoad }
         }
         case SET_FEATURED_PLAYLISTS: {
             return { ...state, featuredPlaylists: payLoad }

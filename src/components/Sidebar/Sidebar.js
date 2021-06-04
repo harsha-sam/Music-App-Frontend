@@ -22,11 +22,11 @@ function Sidebar({playlists}) {
             />
             <SidebarOption title="Home" Icon={HomeIcon} route={"/"}/>
             <SidebarOption title="Search" Icon={SearchIcon} route={"/search"}/>
-            <SidebarOption title="Your Library" Icon={LibraryMusicIcon} route={"/collections/playlists"}/>
+            <SidebarOption title="Your Library" Icon={LibraryMusicIcon} route={"/"}/>
             <br></br>
             <SidebarOption title="Create Playlist" Icon={AddBoxIcon} IconColor={grey['300']} route={"/"}/>
             <SidebarOption title="Liked Songs" Icon={FavoriteRoundedIcon} IconColor={red['900']} 
-            route={"/collections/tracks"}
+            route={"/"}
             />
             <hr className="divider"></hr>
             

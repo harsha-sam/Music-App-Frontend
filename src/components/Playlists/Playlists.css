@@ -1,0 +1,24 @@
+main{
+    margin: 4%;
+    margin-bottom: 10%;   
+}
+.playlistsContainer{
+    display: flex;
+    flex-direction: column;
+}
+.trackRow{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap:10%;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.trackRow:hover{
+    background_color: #000;
+    opacity: 0.7;
+}
+.name{
+    flex-grow: 2;
+}

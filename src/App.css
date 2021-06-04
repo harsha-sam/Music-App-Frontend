@@ -50,9 +50,10 @@ body{
     flex: 1;
     display: flex;
     padding: 3% 2% 0;
-    background-image: linear-gradient(to top, #181818 70%, #000 0%);
+    background-image: linear-gradient(to top, #181818 60%, #000 0%);
     flex-direction: column;
     overflow-x: hidden;
+    height: 85vh;
 }
 .MuiInput-root {
     position: relative;
