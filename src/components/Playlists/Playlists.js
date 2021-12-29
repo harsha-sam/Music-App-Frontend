@@ -19,7 +19,7 @@ const Playlists = ({tracks, title, artist, image}) => {
     return (
         <main>
             <div className="track mb-3">
-                <img src={image} alt={title}/>
+                {image && <img src={image} alt={title} />}
                 <div className="ml-4">
                     <h2 className="mb-3">{title}</h2>
                     <h5 className="ml-1 color-gray">{artist}</h5>

@@ -1,4 +1,4 @@
-import { useRef, useEffect, useContext } from "react"
+import { useEffect, useContext } from "react"
 import { StateContext } from "../../App";
 import { DispatchContext } from "../../App";
 import { SET_PLAY, SET_PLAYING_TRACK_LYRICS } from "../../store/actions";
@@ -8,14 +8,11 @@ import axios from 'axios';
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL
 
 export default function Player() {
-    const isInitialMount = useRef(true);
     const { state } = useContext(StateContext);
     const { dispatch } = useContext(DispatchContext);
 
     useEffect(() => {
-        if (isInitialMount.current && state.playingTracks) {
-            isInitialMount.current = false;
-        } else if (state.product === 'premium') {
+        if (state.user?.product === 'premium') {
             dispatch({ type: SET_PLAYING_TRACK_LYRICS, payLoad: "Loading..."})
             axios
             .get(`${API_BASE_URL}/lyrics`, {
@@ -28,10 +25,11 @@ export default function Player() {
                 console.log(res.data.lyrics);
                 dispatch({ type: SET_PLAYING_TRACK_LYRICS, payLoad: res.data.lyrics})
             })
-            .catch(err => console.log(err))
+              .catch(err => console.log(err))
             dispatch({ type: SET_PLAY, payLoad: true })
          }
-    }, [state.playingTracks, state.product, dispatch])
+    }, [state.playingTracks, state.user?.product, dispatch])
+  
 
     if (!state.accessToken) return null
     return (

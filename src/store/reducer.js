@@ -27,7 +27,8 @@ export const initialState = {
 export const reducer = ((state = initialState, action) => {
     const { type, payLoad } = action;
     switch (type) {
-        case SET_USER: {
+          case SET_USER: {
+            console.log("payload", payLoad);
             return { ...state, user: payLoad }
         }
         case SET_INIT_AUTH: {
@@ -61,7 +62,8 @@ export const reducer = ((state = initialState, action) => {
             return { ...state, play: payLoad }
         }
         case SIGN_OUT: {
-            return { ...state, user: null, accessToken: null }
+            window.location.reload();
+            return initialState
         }
         default: {
             return state

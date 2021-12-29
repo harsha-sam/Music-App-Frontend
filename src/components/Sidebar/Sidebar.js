@@ -21,7 +21,7 @@ function Sidebar({playlists}) {
                 alt="Spotify logo"
             />
             <SidebarOption title="Home" Icon={HomeIcon} route={"/"}/>
-            <SidebarOption title="Search" Icon={SearchIcon} route={"/search"}/>
+            <SidebarOption title="Search & Lyrics" Icon={SearchIcon} route={"/search"}/>
             <SidebarOption title="Your Library" Icon={LibraryMusicIcon} route={"/"}/>
             <br></br>
             <SidebarOption title="Create Playlist" Icon={AddBoxIcon} IconColor={grey['300']} route={"/"}/>
