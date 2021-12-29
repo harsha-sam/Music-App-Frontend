@@ -12,7 +12,7 @@ export default function Player() {
     const { dispatch } = useContext(DispatchContext);
 
     useEffect(() => {
-        if (state.user?.product === 'premium') {
+        if (state.user?.product === 'premium' && state.playingTracks) {
             dispatch({ type: SET_PLAYING_TRACK_LYRICS, payLoad: "Loading..."})
             axios
             .get(`${API_BASE_URL}/lyrics`, {
