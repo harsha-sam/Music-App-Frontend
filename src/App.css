@@ -6,23 +6,13 @@
 .main-flex {
   display: flex;
   flex-wrap: wrap;
-  height: 100vh;
-  overflow-y: scroll;
-}
-.home{
-    flex: 1;
-    background-image: linear-gradient(to top, #181818 66%, #000 0%);
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    padding: 3% 2% 0;
-    overflow-y: overlay;
-    height: 80vh;
+  height: 100%;
 }
 body{
     background-color: #000;
     color: #fff;
     font-family: 'Montserrat', sans-serif;
+    height: 100vh;
 }
 .trackCard{
     background: #000;
@@ -46,14 +36,17 @@ body{
 .avatar{
     margin-left: 85%;
 }
+main{
+  height: 40%;
+}
 .search{
     flex: 1;
     display: flex;
     padding: 3% 2% 0;
     background-image: linear-gradient(to top, #181818 60%, #000 0%);
     flex-direction: column;
-    overflow-x: hidden;
-    height: 85vh;
+    overflow: hidden;
+    height: 90vh;
 }
 .MuiInput-root {
     position: relative;

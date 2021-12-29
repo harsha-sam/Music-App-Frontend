@@ -32,17 +32,20 @@ const Playlists = ({tracks, title, artist, image}) => {
                     <AccessTimeIcon />
                 </div>
                 <hr className="divider" />
-                {
-                    tracks.map((track, index) => {
-                        return <div key={track.uri} className="trackRow" onClick={() => {
-                            dispatch({ type: SET_PLAYING_TRACKS, payLoad: track})
-                        }}>
-                            <span className="index">{index + 1}</span>
-                            <span className="name">{track.title}</span>
-                            <span>{millisToMinsAndSecs(track.duration_ms)}</span>
-                        </div>
-                    })
-                }
+                <div className="playlistTracks">
+            
+                  {
+                      tracks.map((track, index) => {
+                          return <div key={track.uri} className="trackRow" onClick={() => {
+                              dispatch({ type: SET_PLAYING_TRACKS, payLoad: track})
+                          }}>
+                              <span className="index">{index + 1}</span>
+                              <span className="name">{track.title}</span>
+                              <span>{millisToMinsAndSecs(track.duration_ms)}</span>
+                          </div>
+                      })
+                  }
+                </div>
             </div>
         </main>
     )
