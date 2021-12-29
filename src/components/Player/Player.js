@@ -22,7 +22,6 @@ export default function Player() {
                 }
             })
             .then(res => {
-                console.log(res.data.lyrics);
                 dispatch({ type: SET_PLAYING_TRACK_LYRICS, payLoad: res.data.lyrics})
             })
               .catch(err => console.log(err))

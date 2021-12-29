@@ -28,7 +28,6 @@ export const reducer = ((state = initialState, action) => {
     const { type, payLoad } = action;
     switch (type) {
           case SET_USER: {
-            console.log("payload", payLoad);
             return { ...state, user: payLoad }
         }
         case SET_INIT_AUTH: {
@@ -62,7 +61,7 @@ export const reducer = ((state = initialState, action) => {
             return { ...state, play: payLoad }
         }
         case SIGN_OUT: {
-            window.location.reload();
+            window.location.href = process.env.REACT_APP_BASE_URL
             return initialState
         }
         default: {

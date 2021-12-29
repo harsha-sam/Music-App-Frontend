@@ -12,7 +12,6 @@ const Album = ({type}) => {
     })
     const { state } = useContext(StateContext);
     const { id } = useParams();
-    console.log(id);
 
     useEffect(() => {
         if (type === "album"){
@@ -35,7 +34,6 @@ const Album = ({type}) => {
         else if (type === "playlist"){
             state.spotifyApi.getPlaylist(id)
             .then(function(data) {
-                console.log('Some information about this playlist', data.body);
                 const tracks = data.body.tracks.items.map(item =>{
                     const { track } = item;
                     return {
