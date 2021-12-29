@@ -15,7 +15,7 @@ export default function Player() {
     useEffect(() => {
         if (isInitialMount.current && state.playingTracks) {
             isInitialMount.current = false;
-         } else {
+        } else if (state.product === 'premium') {
             dispatch({ type: SET_PLAYING_TRACK_LYRICS, payLoad: "Loading..."})
             axios
             .get(`${API_BASE_URL}/lyrics`, {
@@ -31,7 +31,7 @@ export default function Player() {
             .catch(err => console.log(err))
             dispatch({ type: SET_PLAY, payLoad: true })
          }
-    }, [state.playingTracks, dispatch])
+    }, [state.playingTracks, state.product, dispatch])
 
     if (!state.accessToken) return null
     return (
