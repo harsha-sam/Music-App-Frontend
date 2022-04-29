@@ -52,7 +52,7 @@ const Dashboard = ({ code, childComponent}) => {
         <Sidebar playlists={state.playlists} />
          <div className="search">
             <Chip
-                icon={<Avatar src={state.user?.images?.[0].url} className={classes.small} />}
+                icon={<Avatar src={state.user?.images?.[0]?.url} className={classes.small} />}
                 label={state.user?.display_name}
                 onDelete={() => dispatch({ type: SIGN_OUT })}
                 className="avatar"
